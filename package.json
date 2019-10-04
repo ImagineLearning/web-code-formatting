@@ -1,0 +1,8 @@
+{
+  "name": "web-code-formatting",
+  "version": "1.0.0",
+  "description": "code formatting configurations for prettier and js-beautify",
+  "main": "prettier-config.json",
+  "author": "",
+  "license": "MIT"
+}
