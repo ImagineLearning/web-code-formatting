@@ -17,6 +17,9 @@
 npm-debug.log
 yarn-error.log
 
+# Packaged
+imaginelearning-web-code-formatting-*
+
 # System Files
 .DS_Store
 Thumbs.db
