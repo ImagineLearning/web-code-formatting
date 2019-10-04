@@ -1,8 +1,19 @@
 {
-  "name": "web-code-formatting",
+  "name": "@imaginelearning/web-code-formatting",
   "version": "1.0.0",
-  "description": "code formatting configurations for prettier and js-beautify",
+  "description": "Code formatting configurations for prettier and js-beautify",
   "main": "prettier-config.json",
-  "author": "",
-  "license": "MIT"
+  "author": {
+    "name": "Imagine Learning"
+  },
+  "bugs": {
+    "url": "https://github.com/ImagineLearning/web-code-formatting/issues"
+  },
+  "license": "UNLICENSED",
+  "homepage": "https://www.imaginelearning.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ImagineLearning/web-code-formatting.git"
+  },
+  "private": true
 }
