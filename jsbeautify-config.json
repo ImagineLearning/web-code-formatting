@@ -1,11 +1,11 @@
 {
   "html": {
     "brace_style": "collapse",
-    "indent_with_tabs": true,
+    "end_with_newline": true,
     "indent_inner_html": true,
+    "indent_with_tabs": true,
     "max_preserve_newlines": 1,
     "preserve_newlines": true,
-    "end_with_newline": true,
     "wrap_attributes": "force-aligned"
   }
 }
