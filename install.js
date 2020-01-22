@@ -35,8 +35,8 @@ async function configureHook() {
 
 	// Configure npm scripts
 	const scripts = Object.assign({}, packageJson.scripts || {});
-	scripts['format:prettier'] = 'prettier --config .prettierrc --write "**/*.{ts,js,json,scss,css}"';
-	scripts['format:beautify'] = 'html-beautify -r --config .jsbeautifyrc "**/*.{htm,html}"';
+	scripts['format:prettier'] = 'prettier --config .prettierrc --ignore-path "node_modules/**" --write "**/*.{ts,js,json,scss,css}"';
+	scripts['format:beautify'] = 'html-beautify -r --config .jsbeautifyrc "src/**/*.{htm,html}"';
 	scripts.format = 'npm run format:prettier && npm run format:beautify';
 	packageJson.scripts = scripts;
 
