@@ -24,7 +24,7 @@ npm run format:prettier
 
 ### Configuration
 When installed, this package will add a `.jsbeautifyrc` file in the root directory of the project.
-This will allow your IDE to access the configuration if you are using a JS Beautifier plugin, such as those created for [VS Code](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify).
+This will allow your IDE to access the configuration if you are using a JS Beautifier plugin.
 You can [customize the configuration](https://github.com/beautify-web/js-beautify#options), but keep in mind that it will be overwritten the next time this package is installed.
 
 ### Scripts
