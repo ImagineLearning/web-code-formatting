@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const promisify = require('util').promisify;
+const EOL = require('os').EOL;
 
 const copyFileAsync = promisify(fs.copyFile);
 const readFileAsync = promisify(fs.readFile);
@@ -40,7 +41,7 @@ async function configureHook() {
 	scripts.format = 'npm run format:prettier && npm run format:beautify';
 	packageJson.scripts = scripts;
 
-	await writeFileAsync(packageFile, JSON.stringify(packageJson, null, '\t'));
+	await writeFileAsync(packageFile, JSON.stringify(packageJson, null, '\t') + EOL);
 }
 
 async function configureLinting() {
@@ -66,7 +67,7 @@ async function configureLinting() {
 	projectTslintJson.rulesDirectory = rulesDirectory;
 	projectTslintJson.rules = rules;
 
-	await writeFileAsync(projectTslintFile, JSON.stringify(projectTslintJson, null, '\t'));
+	await writeFileAsync(projectTslintFile, JSON.stringify(projectTslintJson, null, '\t') + EOL);
 }
 
 async function copyJsBeautifyConfig() {
