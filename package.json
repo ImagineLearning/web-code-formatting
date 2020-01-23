@@ -1,22 +1,33 @@
 {
-  "name": "@imaginelearning/web-code-formatting",
-  "version": "1.0.0",
-  "description": "Code formatting configurations for prettier and js-beautify",
-  "main": "prettier-config.json",
-  "author": {
-    "name": "Imagine Learning"
-  },
-  "bugs": {
-    "url": "https://github.com/ImagineLearning/web-code-formatting/issues"
-  },
-  "license": "UNLICENSED",
-  "homepage": "https://www.imaginelearning.com",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ImagineLearning/web-code-formatting.git"
-  },
-  "peerDependencies": {
-    "js-beautify": "^1.10.2",
-    "prettier": "^1.18.2"
-  }
+	"name": "@imaginelearning/web-code-formatting",
+	"version": "1.1.0",
+	"description": "Code formatting configurations for prettier and js-beautify",
+	"main": "install.js",
+	"author": {
+		"name": "Imagine Learning"
+	},
+	"bugs": {
+		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
+	},
+	"license": "UNLICENSED",
+	"homepage": "https://www.imaginelearning.com",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ImagineLearning/web-code-formatting.git"
+	},
+	"engines": {
+		"node": ">=10"
+	},
+	"peerDependencies": {
+		"codelyzer": "^4.0.1",
+		"husky": "^3.0.7",
+		"js-beautify": "^1.10.2",
+		"lint-staged": "^9.4.1",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+		"tslint": "^5.9.1"
+	},
+	"scripts": {
+		"install": "node install.js"
+	}
 }
