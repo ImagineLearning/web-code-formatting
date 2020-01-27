@@ -90,6 +90,14 @@ async function copyPrettierConfig() {
 	);
 }
 
+async function copyEditorConfig() {
+	console.log('Copying editorconfig...');
+	await copyFileAsync(
+		path.resolve(__dirname, '.editorconfig'),
+		path.resolve(process.env.INIT_CWD, '.editorconfig')
+	);
+}
+
 async function install() {
 	// Make sure we're not installing in this project
 	const packageName = '@imaginelearning/web-code-formatting';
@@ -102,5 +110,6 @@ async function install() {
 	await configureLinting();
 	await copyJsBeautifyConfig();
 	await copyPrettierConfig();
+	await copyEditorConfig();
 	await configureHook();
 }
