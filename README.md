@@ -1,6 +1,9 @@
 # Imagine Learning: web-code-formatting
 This package contains Imagine Learning standardized formatting configuration files for [Prettier](https://prettier.io) and [JS Beautifier](https://github.com/beautify-web/js-beautify).
 
+## EditorConfig
+[EditorConfig](https://editorconfig.org/) is used to tell your editor how to view and format files. GitHub also uses the `.editorconfig` file when displaying files.
+
 ## Prettier
 [Prettier](https://github.com/prettier/prettier) is used for formatting all TypeScript, JavaScript, JSON, SASS, and CSS files.
 
