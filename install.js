@@ -9,6 +9,8 @@ const copyFileAsync = promisify(fs.copyFile);
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
+const CWD = process.env.INIT_CWD || process.cwd();
+
 install()
 	.then(() => console.log('Installation complete.'))
 	.catch(function(error) {
@@ -18,18 +20,18 @@ install()
 
 async function configureHook() {
 	console.log('Configuring pre-commit hook...');
-	const packageFile = path.resolve(process.env.INIT_CWD, 'package.json');
+	const packageFile = path.resolve(CWD, 'package.json');
 	const packageJson = JSON.parse(await readFileAsync(packageFile));
 
 	// Configure lint-staged
-	const ls = Object.apply({}, packageJson['lint-staged'] || {});
+	const ls = Object.assign({}, packageJson['lint-staged'] || {});
 	ls['*.(htm|html)'] = ['html-beautify -r --config .jsbeautifyrc', 'git add'];
 	ls['*.(ts|js|json|scss|css)'] = ['pretty-quick --staged --config .prettierrc', 'git add'];
 	packageJson['lint-staged'] = ls;
 
 	// Configure pre-commit hook with husky
-	const husky = Object.apply({}, packageJson.husky || {});
-	const hooks = Object.apply({}, husky.hooks || {});
+	const husky = Object.assign({}, packageJson.husky || {});
+	const hooks = Object.assign({}, husky.hooks || {});
 	hooks['pre-commit'] = 'lint-staged';
 	husky.hooks = hooks;
 	packageJson.husky = husky;
@@ -46,7 +48,7 @@ async function configureHook() {
 
 async function configureLinting() {
 	console.log('Configuring tslint...');
-	const projectTslintFile = path.resolve(process.env.INIT_CWD, 'tslint.json');
+	const projectTslintFile = path.resolve(CWD, 'tslint.json');
 	let projectTslintJson = {};
 	if (fs.existsSync(projectTslintFile)) {
 		projectTslintJson = JSON.parse(await readFileAsync(projectTslintFile));
@@ -72,36 +74,24 @@ async function configureLinting() {
 
 async function copyJsBeautifyConfig() {
 	console.log('Copying js-beautify config...');
-	await copyFileAsync(
-		path.resolve(__dirname, 'jsbeautify-config.json'),
-		path.resolve(process.env.INIT_CWD, '.jsbeautifyrc')
-	);
+	await copyFileAsync(path.resolve(__dirname, 'jsbeautify-config.json'), path.resolve(CWD, '.jsbeautifyrc'));
 }
 
 async function copyPrettierConfig() {
 	console.log('Copying prettier config...');
-	await copyFileAsync(
-		path.resolve(__dirname, 'prettier-config.json'),
-		path.resolve(process.env.INIT_CWD, '.prettierrc')
-	);
-	await copyFileAsync(
-		path.resolve(__dirname, '.prettierignore'),
-		path.resolve(process.env.INIT_CWD, '.prettierignore')
-	);
+	await copyFileAsync(path.resolve(__dirname, 'prettier-config.json'), path.resolve(CWD, '.prettierrc'));
+	await copyFileAsync(path.resolve(__dirname, '.prettierignore'), path.resolve(CWD, '.prettierignore'));
 }
 
 async function copyEditorConfig() {
 	console.log('Copying editorconfig...');
-	await copyFileAsync(
-		path.resolve(__dirname, '.editorconfig'),
-		path.resolve(process.env.INIT_CWD, '.editorconfig')
-	);
+	await copyFileAsync(path.resolve(__dirname, '.editorconfig'), path.resolve(CWD, '.editorconfig'));
 }
 
 async function install() {
 	// Make sure we're not installing in this project
 	const packageName = '@imaginelearning/web-code-formatting';
-	const packageJson = JSON.parse(await readFileAsync(path.resolve(process.env.INIT_CWD, 'package.json')));
+	const packageJson = JSON.parse(await readFileAsync(path.resolve(CWD, 'package.json')));
 	if (packageJson.name === packageName) {
 		throw new Error('Cannot install inside ' + packageName + '.');
 	}
