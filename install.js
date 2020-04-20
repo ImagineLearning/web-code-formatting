@@ -18,6 +18,7 @@ if (!framework) {
 	process.exit(1);
 }
 
+console.log('Installing code formatting tools for ' + framework + '...');
 install(framework)
 	.then(() => console.log('Installation complete.'))
 	.catch(function (error) {
@@ -44,7 +45,9 @@ async function configureHook(framework) {
 	// Configure pre-commit hook with husky
 	const husky = Object.assign({}, packageJson.husky || {});
 	const hooks = Object.assign({}, husky.hooks || {});
-	hooks['pre-commit'] = 'lint-staged';
+	if (!hooks['pre-commit'] || !/lint-staged/.test(hooks['pre-commit'])) {
+		hooks['pre-commit'] = 'lint-staged';
+	}
 	husky.hooks = hooks;
 	packageJson.husky = husky;
 
@@ -66,11 +69,11 @@ async function configureEsLint() {
 	if (fs.existsSync(projectEslintFile)) {
 		projectEslintJson = JSON.parse(await readFileAsync(projectEslintFile));
 	}
-	const eslintJson = JSON.parse(await readFileAsync(path.resolve(__dirname, 'config', 'eslint.json')));
+	const eslintJson = JSON.parse(await readFileAsync(path.resolve(__dirname, 'configs', 'eslint.json')));
 
 	// Merge "extends" property
 	const extendsProp = eslintJson.extends.reduce((accumulator, item) => {
-		if (accumulator.findIndex(item) < 0) {
+		if (accumulator.indexOf(item) < 0) {
 			return accumulator.concat([item]);
 		}
 		return accumulator;
@@ -103,7 +106,7 @@ async function configureTsLint() {
 	if (fs.existsSync(projectTslintFile)) {
 		projectTslintJson = JSON.parse(await readFileAsync(projectTslintFile));
 	}
-	const tslintJson = JSON.parse(await readFileAsync(path.resolve(__dirname, 'tslint.json')));
+	const tslintJson = JSON.parse(await readFileAsync(path.resolve(__dirname, 'configs', 'tslint.json')));
 	const rules = Object.assign({}, projectTslintJson.rules || {}, tslintJson.rules);
 	let rulesDirectory = projectTslintJson.rulesDirectory || [];
 	if (typeof rulesDirectory === 'string') {
@@ -124,18 +127,18 @@ async function configureTsLint() {
 
 async function copyJsBeautifyConfig() {
 	console.log('Copying js-beautify config...');
-	await copyFileAsync(path.resolve(__dirname, 'jsbeautify-config.json'), path.resolve(CWD, '.jsbeautifyrc'));
+	await copyFileAsync(path.resolve(__dirname, 'configs', 'jsbeautify-config.json'), path.resolve(CWD, '.jsbeautifyrc'));
 }
 
 async function copyPrettierConfig() {
 	console.log('Copying prettier config...');
-	await copyFileAsync(path.resolve(__dirname, 'prettier-config.json'), path.resolve(CWD, '.prettierrc'));
-	await copyFileAsync(path.resolve(__dirname, '.prettierignore'), path.resolve(CWD, '.prettierignore'));
+	await copyFileAsync(path.resolve(__dirname, 'configs', 'prettier-config.json'), path.resolve(CWD, '.prettierrc'));
+	await copyFileAsync(path.resolve(__dirname, 'configs', '.prettierignore'), path.resolve(CWD, '.prettierignore'));
 }
 
 async function copyEditorConfig() {
 	console.log('Copying editorconfig...');
-	await copyFileAsync(path.resolve(__dirname, '.editorconfig'), path.resolve(CWD, '.editorconfig'));
+	await copyFileAsync(path.resolve(__dirname, 'configs', '.editorconfig'), path.resolve(CWD, '.editorconfig'));
 }
 
 async function install(framework) {
