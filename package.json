@@ -1,13 +1,10 @@
 {
 	"name": "@imaginelearning/web-code-formatting",
-	"version": "1.2.1",
+	"version": "2.0.0",
 	"description": "Code formatting configurations for prettier and js-beautify",
 	"main": "install.js",
 	"author": {
 		"name": "Imagine Learning"
-	},
-	"bin": {
-		"web-code-formatting": "./install.js"
 	},
 	"bugs": {
 		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
@@ -21,16 +18,15 @@
 	"engines": {
 		"node": ">=10"
 	},
-	"peerDependencies": {
-		"codelyzer": "^4.0.1",
-		"husky": "^3.0.7",
-		"js-beautify": "^1.10.2",
-		"lint-staged": "^9.4.1",
-		"prettier": "^1.18.2",
-		"pretty-quick": "^1.11.1",
-		"tslint": "^5.9.1"
-	},
 	"scripts": {
-		"install": "node install.js"
+		"build": "node build.js",
+		"prebuild": "yarn clean",
+		"clean": "shx rm -rf dist",
+		"package": "cd ./dist/web-code-formatting-angular && yarn pack && cd ../web-code-formatting-react && yarn pack",
+		"prepackage": "yarn build"
+	},
+	"devDependencies": {
+		"ncp": "^2.0.0",
+		"shx": "^0.3.2"
 	}
 }
