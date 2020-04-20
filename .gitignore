@@ -19,6 +19,7 @@ yarn-error.log
 
 # Packaged
 imaginelearning-web-code-formatting-*
+dist/
 
 # System Files
 .DS_Store
