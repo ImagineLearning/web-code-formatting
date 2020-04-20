@@ -1,0 +1,26 @@
+{
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "react-app"],
+	"plugins": ["@typescript-eslint"],
+	"overrides": [
+		{
+			"files": "src/**/*.{ts,tsx}",
+			"rules": {
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/member-ordering": "warn",
+				"@typescript-eslint/no-inferrable-types": "off",
+				"@typescript-eslint/no-explicit-any": "warn"
+			}
+		},
+		{
+			"files": "src/**/*.test.{ts,tsx}",
+			"rules": {
+				"@typescript-eslint/no-empty-function": "off"
+			}
+		}
+	],
+	"rules": {
+		"no-mixed-spaces-and-tabs": "off",
+		"no-restricted-imports": ["error", "rxjs/Rx"],
+		"prefer-const": "warn"
+	}
+}
