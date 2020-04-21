@@ -1,6 +1,6 @@
 {
 	"name": "@imaginelearning/web-code-formatting",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"description": "Code formatting configurations for prettier and js-beautify",
 	"main": "install.js",
 	"author": {
