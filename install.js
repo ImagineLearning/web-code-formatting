@@ -57,6 +57,9 @@ async function configureHook(framework) {
 		'prettier --config .prettierrc --ignore-path "node_modules/**" --write "**/*.{' + prettierExtensions.join(',') + '}"';
 	scripts['format:beautify'] = 'html-beautify -r --config .jsbeautifyrc "src/**/*.{htm,html}"';
 	scripts.format = 'npm run format:prettier && npm run format:beautify';
+	if (framework === 'react') {
+		scripts.lint = 'eslint "src/**/*.{js,ts,tsx}"';
+	}
 	packageJson.scripts = scripts;
 
 	await writeFileAsync(packageFile, JSON.stringify(packageJson, null, '\t') + EOL);
@@ -79,6 +82,16 @@ async function configureEsLint() {
 		return accumulator;
 	}, projectEslintJson.extends || []);
 	projectEslintJson.extends = extendsProp;
+
+	// Merge "plugins" property
+	const pluginsProp = eslintJson.plugins.reduce((accumulator, item) => {
+		const index = accumulator.indexOf(item);
+		if (index < 0) {
+			return accumulator.concat([item]);
+		}
+		return accumulator;
+	}, projectEslintJson.plugins || []);
+	projectEslintJson.plugins = pluginsProp;
 
 	// Merge "overrides" property
 	const overridesProp = eslintJson.overrides.reduce((accumulator, item) => {
