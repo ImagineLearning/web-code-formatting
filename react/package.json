@@ -1,0 +1,35 @@
+{
+	"name": "@imaginelearning/web-code-formatting-react",
+	"version": "x.x.x",
+	"description": "React code formatting configurations for prettier and js-beautify",
+	"main": "install.js",
+	"author": {
+		"name": "Imagine Learning"
+	},
+	"bin": {
+		"web-react-code-formatting": "./install.js"
+	},
+	"bugs": {
+		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
+	},
+	"license": "UNLICENSED",
+	"homepage": "https://www.imaginelearning.com",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ImagineLearning/web-code-formatting.git"
+	},
+	"engines": {
+		"node": ">=10"
+	},
+	"peerDependencies": {
+		"husky": "^3.0.7",
+		"js-beautify": "^1.10.2",
+		"lint-staged": "^10.0.7",
+		"prettier": "^1.18.2",
+		"pretty-quick": "^1.11.1",
+		"eslint": "^6.8.0"
+	},
+	"scripts": {
+		"install": "node install.js"
+	}
+}
