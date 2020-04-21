@@ -31,7 +31,7 @@ async function configureHook(framework) {
 	const packageFile = path.resolve(CWD, 'package.json');
 	const packageJson = JSON.parse(await readFileAsync(packageFile));
 
-	const prettierExtensions = ['ts', 'js', 'json', 'scss', 'css'];
+	const prettierExtensions = ['css', 'js', 'json', 'scss', 'ts'];
 	if (framework === 'react') {
 		prettierExtensions.push('tsx');
 	}
@@ -91,6 +91,7 @@ async function configureEsLint() {
 		updated[index].rules = rules;
 		return updated;
 	}, projectEslintJson.overrides || []);
+	projectEslintJson.overrides = overridesProp;
 
 	// Merge "rules" property
 	const rules = Object.assign({}, projectEslintJson.rules || {}, eslintJson.rules);
