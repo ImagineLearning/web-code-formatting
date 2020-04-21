@@ -23,6 +23,7 @@
 		"prebuild": "yarn clean",
 		"clean": "shx rm -rf dist",
 		"package": "cd ./dist/web-code-formatting-angular && yarn pack && cd ../web-code-formatting-react && yarn pack",
+		"postpackage": "ncp ./.npmrc ./dist/web-code-formatting-angular/.npmrc && ncp ./.npmrc ./dist/web-code-formatting-react/.npmrc",
 		"prepackage": "yarn build"
 	},
 	"devDependencies": {
