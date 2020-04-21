@@ -7,7 +7,7 @@
 		"name": "Imagine Learning"
 	},
 	"bin": {
-		"web-react-code-formatting": "./install.js react"
+		"web-react-code-formatting": "./install.js"
 	},
 	"bugs": {
 		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
@@ -30,6 +30,6 @@
 		"eslint": "^6.8.0"
 	},
 	"scripts": {
-		"install": "node install.js react"
+		"install": "node install.js"
 	}
 }

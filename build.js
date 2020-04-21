@@ -20,15 +20,19 @@ async function build(framework) {
 	const destPath = path.resolve(CWD, 'dist', 'web-code-formatting-' + framework);
 
 	// Create destination directory
-	await mkdirAsync(destPath, { recursive: true }); 
+	await mkdirAsync(destPath, { recursive: true });
 
 	// Copy config, install, and README files
 	await ncpAsync(path.resolve(CWD, 'configs'), path.resolve(destPath, 'configs'));
-	await copyFileAsync(path.resolve(CWD, 'install.js'), path.resolve(destPath, 'install.js'));
 	await copyFileAsync(path.resolve(CWD, 'README.md'), path.resolve(destPath, 'README.md'));
 
+	// Copy install file and set framework variable
+	let installFileContent = (await readFileAsync(path.resolve(CWD, 'install.js'))).toString('utf8');
+	installFileContent = installFileContent.replace('process.argv[2]', "'" + framework + "'");
+	await writeFileAsync(path.resolve(destPath, 'install.js'), installFileContent);
+
 	// Copy appropriate package.json file
-	const frameworkPackageJson = JSON.parse(await readFileAsync(path.resolve(CWD, framework + '-package.json')));
+	const frameworkPackageJson = JSON.parse(await readFileAsync(path.resolve(CWD, framework, 'package.json')));
 	frameworkPackageJson.version = packageJson.version;
 	await writeFileAsync(path.resolve(destPath, 'package.json'), JSON.stringify(frameworkPackageJson, null, '\t') + EOL);
 }

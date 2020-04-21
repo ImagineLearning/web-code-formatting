@@ -7,7 +7,7 @@
 		"name": "Imagine Learning"
 	},
 	"bin": {
-		"web-code-formatting-angular": "./install.js angular"
+		"web-code-formatting-angular": "./install.js"
 	},
 	"bugs": {
 		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
@@ -31,6 +31,6 @@
 		"tslint": "^5.9.1"
 	},
 	"scripts": {
-		"install": "node install.js angular"
+		"install": "node install.js"
 	}
 }
