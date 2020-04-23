@@ -6,7 +6,8 @@
 			"files": "src/**/*.{js,jsx,ts,tsx}",
 			"rules": {
 				"@typescript-eslint/camelcase": "warn",
-				"@typescript-eslint/explicit-function-return-type": "off"
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": true }]
 			}
 		},
 		{
@@ -18,13 +19,15 @@
 			}
 		},
 		{
-			"files": "src/**/*.test.{ts,tsx}",
+			"files": "src/**/*.test.{js,ts,tsx}",
 			"rules": {
-				"@typescript-eslint/no-empty-function": "off"
+				"@typescript-eslint/no-empty-function": "off",
+				"@typescript-eslint/no-var-requires": "off"
 			}
 		}
 	],
 	"rules": {
+		"curly": "warn",
 		"no-mixed-spaces-and-tabs": "off",
 		"no-restricted-imports": ["error", "rxjs/Rx"],
 		"prefer-const": "warn"
