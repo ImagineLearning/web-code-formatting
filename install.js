@@ -9,7 +9,11 @@ const copyFileAsync = promisify(fs.copyFile);
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
-const CWD = process.env.INIT_CWD || process.cwd();
+let CWD =
+	process.env.INIT_CWD && fs.existsSync(path.resolve(process.env.INIT_CWD, 'package.json')) ? process.env.INIT_CWD : process.cwd();
+if (/node_modules\/@imaginelearning\/web-code-formatting-(angular|react)$/.test(CWD)) {
+	CWD = path.resolve(CWD, '..', '..', '..');
+}
 
 const framework = process.argv[2];
 
@@ -95,7 +99,7 @@ async function configureEsLint() {
 
 	// Merge "overrides" property
 	const overridesProp = eslintJson.overrides.reduce((accumulator, item) => {
-		const index = accumulator.findIndex((i) => i.files === item.files);
+		const index = accumulator.findIndex(i => i.files === item.files);
 		if (index < 0) {
 			return accumulator.concat([item]);
 		}
