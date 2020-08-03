@@ -9,7 +9,7 @@
 	"bugs": {
 		"url": "https://github.com/ImagineLearning/web-code-formatting/issues"
 	},
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"homepage": "https://www.imaginelearning.com",
 	"repository": {
 		"type": "git",
